@@ -1,5 +1,5 @@
 name: 'Nextcloud push app to appstore'
-description: 'Push a new release of your Nextcloud app directly to the Nextcloud appstore via it's REST interface.'
+description: 'Push a new release of your Nextcloud app directly to the Nextcloud appstore via its REST interface.'
 inputs:
   app_name:
     description: 'The id of your Nextcloud app'
