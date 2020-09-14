@@ -23,6 +23,7 @@ runs:
     - run: |
         echo "${{ inputs.app_private_key }}" > "$APP_PRIVATE_KEY_FILE"
         ./push_appstore.sh
+      shell: bash
       env:
         APP_NAME: ${{ inputs.app_name }}
         APPSTORE_TOKEN: ${{ inputs.appstore_token }}
