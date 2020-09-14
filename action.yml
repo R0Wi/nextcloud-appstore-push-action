@@ -1,0 +1,32 @@
+name: 'Nextcloud push app to appstore'
+description: 'Push a new release of your Nextcloud app directly to the Nextcloud appstore via it's REST interface.'
+inputs:
+  app_name:
+    description: 'The id of your Nextcloud app'
+    required: true
+  appstore_token:
+    description: 'A valid access token to upload a new version of your app into Nextcloud appstore'
+    required: true
+  download_url:
+    description: 'The download url of you app tarball'
+    required: true
+  app_private_key:
+    description: 'The private key string of you app to sign the new release. Usually stored in Github Secrets'
+    required: true
+  nightly:
+    description: 'Controls if the app will be published as nightly into the Nextcloud appstore'
+    required: false
+    default: false
+runs:
+  using: "composite"
+  steps: 
+    - run: |
+        echo "${{ inputs.app_private_key }}" > "$APP_PRIVATE_KEY_FILE"
+        ./push_appstore.sh
+      env:
+        APP_NAME: ${{ inputs.app_name }}
+        APPSTORE_TOKEN: ${{ inputs.appstore_token }}
+        NIGHTLY: ${{ inputs.nightly }}
+        DOWNLOAD_URL: ${{ inputs.download_url }}
+        APP_PRIVATE_KEY_FILE: ${{ github.workspace }}/${{ inputs.app_name }}.key
+      
