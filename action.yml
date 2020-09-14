@@ -22,7 +22,7 @@ runs:
   steps: 
     - run: |
         echo "${{ inputs.app_private_key }}" > "$APP_PRIVATE_KEY_FILE"
-        ./push_appstore.sh
+        ${{ github.action_path }}/push_appstore.sh
       shell: bash
       env:
         APP_NAME: ${{ inputs.app_name }}
