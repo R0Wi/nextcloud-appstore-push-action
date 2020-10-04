@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euxo pipefail
 
 # Used environment-variables:
 #   APP_NAME
