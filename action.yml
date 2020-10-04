@@ -6,7 +6,13 @@ inputs:
     required: true
   appstore_token:
     description: 'A valid access token to upload a new version of your app into Nextcloud appstore'
-    required: true
+    required: false
+  appstore_username:
+    description: 'Username for Nextcloud appstore'
+    required: false
+  appstore_password:
+    description: 'Password for Nextcloud appstore'
+    required: false
   download_url:
     description: 'The download url of you app tarball'
     required: true
@@ -27,6 +33,8 @@ runs:
       env:
         APP_NAME: ${{ inputs.app_name }}
         APPSTORE_TOKEN: ${{ inputs.appstore_token }}
+        APPSTORE_USERNAME: ${{ inputs.appstore_username }}
+        APPSTORE_PASSWORD: ${{ inputs.appstore_password }}
         NIGHTLY: ${{ inputs.nightly }}
         DOWNLOAD_URL: ${{ inputs.download_url }}
         APP_PRIVATE_KEY_FILE: ${{ github.workspace }}/${{ inputs.app_name }}.key
