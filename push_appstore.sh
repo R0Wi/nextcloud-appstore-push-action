@@ -13,7 +13,7 @@ set -euxo pipefail
 script_dir="$(dirname "$0")"
 appstore_url="https://apps.nextcloud.com/api/v1/apps/releases"
 
-"${script_dir}/functions.sh"
+. "${script_dir}/functions.sh"
 
 echo "Downloading app tarball for signing"
 wget "$DOWNLOAD_URL" -O "${APP_NAME}.tar.gz"
