@@ -4,9 +4,11 @@
 *       - Github releases tarball download API
 */
 
-var express = require('express');
-var http = require('http');
-var bodyParser = require('body-parser');
+const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const { formatWithOptions } = require('util');
 
 var app = express();
 app.use(bodyParser.text({
@@ -19,16 +21,22 @@ app.use(bodyParser.text({
 app.use('/github/test_app_artifact.tar.gz', express.static(__dirname + '/test_app_artifact.tar.gz'));
 
 /** Nextcloud appstore API */
-app.post('/api/v1/apps/releases', function (req, res) {
-  console.log(req.body);
-  res = res.status(200);
+app.post('/api/v1/apps/releases/ok', function (req, res) {
+  var text = req.body + "\n" + JSON.stringify(req.headers);
+  fs.writeFileSync('server_output.txt', text);
   if (req.get('Content-Type')) {
-    console.log("Content-Type: " + req.get('Content-Type'));
     res = res.type(req.get('Content-Type'));
   }
-  res.send(req.body);
+  res.status(200).send('');
+});
+app.post('/api/v1/apps/releases/badrequest', function (req, res) {
+  if (req.get('Content-Type')) {
+    res = res.type(req.get('Content-Type'));
+  }
+  res.status(400).send('{ "message": "error" }');
 });
 
+/** Stops the webserver after testing */
 app.get('/stop', function (req, res) {
     res = res.status(200);
     res.send('OK');

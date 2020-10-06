@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -eo pipefail
 
 # Used environment-variables:
 #   APP_NAME
@@ -11,8 +11,7 @@ set -euxo pipefail
 #   APP_PRIVATE_KEY_FILE
 
 script_dir="$(dirname "$0")"
-appstore_url="http://localhost:7000/api/v1/apps/releases"
-#"https://apps.nextcloud.com/api/v1/apps/releases"
+appstore_url=$APPSTORE_URL || "https://apps.nextcloud.com/api/v1/apps/releases"
 
 . "${script_dir}/functions.sh"
 
@@ -27,11 +26,11 @@ echo "Creating new app release in Nextcloud appstore (nightly=${NIGHTLY})"
 if [ ! -z $APPSTORE_TOKEN ]
 then
     echo "Using token authentication"
-    curl -s --fail --show-error -X POST $appstore_url -H "Authorization: Token ${APPSTORE_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${DOWNLOAD_URL}\", \"signature\": \"${sign}\", \"nightly\": ${NIGHTLY} }"
+    curl -s --fail --show-error -X POST $appstore_url -H "Authorization: Token ${APPSTORE_TOKEN}" -H "Content-Type: application/json" -d "{\"download\": \"${DOWNLOAD_URL}\", \"signature\": \"${sign}\", \"nightly\": ${NIGHTLY} }"
 elif [ ! -z $APPSTORE_USERNAME  ] && [ ! -z $APPSTORE_PASSWORD ]
 then
     echo "Using username password authentication"
-    curl -s --fail --show-error -X POST $appstore_url -u "${APPSTORE_USERNAME}:${APPSTORE_PASSWORD}" -H "Content-Type: application/json" -d "{\"download\":\"${DOWNLOAD_URL}\", \"signature\": \"${sign}\", \"nightly\": ${NIGHTLY} }"
+    curl -s --fail --show-error -X POST $appstore_url -u "${APPSTORE_USERNAME}:${APPSTORE_PASSWORD}" -H "Content-Type: application/json" -d "{\"download\": \"${DOWNLOAD_URL}\", \"signature\": \"${sign}\", \"nightly\": ${NIGHTLY} }"
 else
     echo "Authentication cannot be done. Please provide 'appstore_token' or 'appstore_username' and 'appstore_password' input variables."
     exit 1
