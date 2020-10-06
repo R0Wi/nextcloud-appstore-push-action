@@ -7,3 +7,13 @@
     [ "$status" = 0 ]
     [ "$output" = $expected ]
 }
+
+@test "Test app upload with token non nightly" {
+    export DOWNLOAD_URL="http://localhost:7000/github/test_app_artifact.tar.gz"
+    export APP_NAME="test_app"
+    export APP_PRIVATE_KEY_FILE="test_appkey.key"
+    export NIGHTLY="false"
+    export APPSTORE_TOKEN="MY_TOKEN"
+    
+    ../push_appstore.sh
+}

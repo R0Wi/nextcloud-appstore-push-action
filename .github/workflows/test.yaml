@@ -10,7 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install Bats
-        run: sudo apt-get update && sudo apt-get -y install bats
+      - name: Install test environment
+        run: sudo apt-get update && sudo apt-get -y install bats nodejs npm
+      - name: Install node dependencies
+        run: cd test && npm install
       - name: Run tests
-        run: cd test && bats test.bats  
+        run: cd test && chmod +x run_tests.sh && ./run_tests.sh

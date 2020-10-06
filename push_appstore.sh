@@ -11,7 +11,8 @@ set -euxo pipefail
 #   APP_PRIVATE_KEY_FILE
 
 script_dir="$(dirname "$0")"
-appstore_url="https://apps.nextcloud.com/api/v1/apps/releases"
+appstore_url="http://localhost:7000/api/v1/apps/releases"
+#"https://apps.nextcloud.com/api/v1/apps/releases"
 
 . "${script_dir}/functions.sh"
 
