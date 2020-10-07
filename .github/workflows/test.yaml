@@ -1,0 +1,18 @@
+name: Run tests
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  runtests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install test environment
+        run: sudo apt-get update && sudo apt-get -y install bats nodejs npm
+      - name: Install node dependencies
+        run: cd test && npm install
+      - name: Run tests
+        run: cd test && chmod +x run_tests.sh && ./run_tests.sh
