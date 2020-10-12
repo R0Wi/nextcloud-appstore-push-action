@@ -35,6 +35,7 @@ runs:
         APPSTORE_TOKEN: ${{ inputs.appstore_token }}
         APPSTORE_USERNAME: ${{ inputs.appstore_username }}
         APPSTORE_PASSWORD: ${{ inputs.appstore_password }}
+        APPSTORE_URL: "https://apps.nextcloud.com/api/v1/apps/releases"
         NIGHTLY: ${{ inputs.nightly }}
         DOWNLOAD_URL: ${{ inputs.download_url }}
         APP_PRIVATE_KEY_FILE: ${{ github.workspace }}/${{ inputs.app_name }}.key
