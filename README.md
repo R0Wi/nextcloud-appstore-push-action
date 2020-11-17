@@ -1,3 +1,7 @@
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/R0Wi/nextcloud-appstore-push-action)
+![Run tests](https://github.com/R0Wi/nextcloud-appstore-push-action/workflows/Run%20tests/badge.svg)
+[![GitHub license](https://img.shields.io/github/license/R0Wi/nextcloud-appstore-push-action)](https://github.com/R0Wi/nextcloud-appstore-push-action/blob/master/LICENSE)
+
 # Upload a new app version to Nextcloud's appstore
 This Github Action automatically publishes a new app version in the Nextcloud appstore after you created a new Github release.
 
