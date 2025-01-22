@@ -8,7 +8,6 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const { formatWithOptions } = require('util');
 
 var app = express();
 app.use(bodyParser.text({
