@@ -16,7 +16,8 @@ script_dir="$(dirname "$0")"
 . "${script_dir}/functions.sh"
 
 echo "Downloading app tarball for signing"
-wget "$DOWNLOAD_URL" -O "${APP_NAME}.tar.gz"
+wget --tries=10 --waitretry=15 --retry-on-http-error=404 \
+     "$DOWNLOAD_URL" -O "${APP_NAME}.tar.gz"
 
 echo "Creating signature for app release"
 sign="`createsign ${APP_PRIVATE_KEY_FILE} ${APP_NAME}.tar.gz`"
